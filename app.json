@@ -3,7 +3,7 @@
     "name": "myHw3N4",
     "slug": "myHw3N4",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "myhw3n4",
     "userInterfaceStyle": "automatic",
