@@ -53,21 +53,16 @@ export default function TabLayout() {
 
   const [selecetedCategory, setSelectedCategory] = useState<string>("All");
 
-
-  const filteredItems = selecetedCategory === "All" ? items : items.filter((p) => p.category === selecetedCategory);
+  const filteredItems =
+    selecetedCategory === "All"
+      ? items
+      : items.filter((p) => p.category === selecetedCategory);
 
   const { width, height } = useWindowDimensions();
   const isPortrait = height > width;
 
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <Header cart={cart} />
-      <SubHeader cart={cart} />
-      <CategoryFilterList
-        setSelectedCategory={setSelectedCategory}
-        selectedCategory={selecetedCategory}
-      />
-      <AddNewProduct addNewItem={handleAddNewItem} />
       <FlatList
         data={filteredItems}
         key={isPortrait ? "p" : "l"}
@@ -78,6 +73,18 @@ export default function TabLayout() {
           gap: Spacings.large,
           padding: Spacings.extraLarge,
         }}
+        keyboardShouldPersistTaps="handled"
+        ListHeaderComponent={
+          <>
+            <Header cart={cart} />
+            <SubHeader cart={cart} />
+            <CategoryFilterList
+              setSelectedCategory={setSelectedCategory}
+              selectedCategory={selecetedCategory}
+            />
+            <AddNewProduct addNewItem={handleAddNewItem} />
+          </>
+        }
         renderItem={({ item }) => (
           <Product product={item} addToCart={handleAddToCart} />
         )}
@@ -90,6 +97,5 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.background,
-    marginHorizontal: Spacings.mediumLarge,
   },
 });
